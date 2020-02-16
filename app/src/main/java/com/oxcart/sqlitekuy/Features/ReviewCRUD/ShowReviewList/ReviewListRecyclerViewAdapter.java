@@ -19,6 +19,7 @@ import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseContract;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.Subject;
@@ -109,5 +110,11 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
             ((ReviewListActivity) context).viewVisibility();
         } else
             Toast.makeText(context, "Cannot delete!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setFilter(ArrayList<Review> newListReview){
+        reviewList = new ArrayList<>();
+        reviewList.addAll(newListReview);
+        notifyDataSetChanged();
     }
 }

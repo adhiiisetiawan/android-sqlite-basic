@@ -17,11 +17,13 @@ import com.orhanobut.logger.Logger;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.Book;
 import com.oxcart.sqlitekuy.Features.BookCRUD.UpdateBookInfo.BookUpdateDialogFragment;
 import com.oxcart.sqlitekuy.Features.BookCRUD.UpdateBookInfo.BookUpdateListener;
+import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.ShowReviewList.ReviewListActivity;
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseContract;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomViewHolder> {
@@ -120,5 +122,11 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
         } else
             Toast.makeText(context, "Book not deleted. Something wrong!", Toast.LENGTH_LONG).show();
 
+    }
+
+    public void setFilter(ArrayList<Book> newListBook){
+        bookList = new ArrayList<>();
+        bookList.addAll(newListBook);
+        notifyDataSetChanged();
     }
 }

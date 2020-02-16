@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
@@ -29,7 +31,7 @@ import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewListActivity extends AppCompatActivity implements ReviewCreateListener {
+public class ReviewListActivity extends AppCompatActivity implements ReviewCreateListener, SearchView.OnQueryTextListener {
     private long bookNumber;
 
     private DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(this);
@@ -141,6 +143,30 @@ public class ReviewListActivity extends AppCompatActivity implements ReviewCreat
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
+        MenuItem search = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) search.getActionView();
+        searchView.setOnQueryTextListener(this);
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<Review> reviewArrayList = new ArrayList<>();
+        for (Review review : reviewList){
+            String reviewerName = review.getReviwer_name().toLowerCase();
+            if (reviewerName.contains(newText)){
+                reviewArrayList.add(review);
+            }
+        }
+
+        reviewListRecyclerViewAdapter.setFilter(reviewArrayList);
+        return true;
     }
 }

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -24,6 +25,7 @@ import com.orhanobut.logger.Logger;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.Book;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.BookCreateDialogFragment;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.BookCreateListener;
+import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseContract;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
@@ -31,7 +33,7 @@ import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookListActivity extends AppCompatActivity implements BookCreateListener {
+public class BookListActivity extends AppCompatActivity implements BookCreateListener, SearchView.OnQueryTextListener {
     private DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(this);
 
     private List<Book> bookList = new ArrayList<>();
@@ -80,6 +82,11 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+
+
+        MenuItem search = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) search.getActionView();
+        searchView.setOnQueryTextListener(this);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -144,5 +151,27 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
         bookListRecyclerViewAdapter.notifyDataSetChanged();
         viewVisibility();
         Logger.d(book.getTitle());
+    }
+
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<Book> bookArrayList = new ArrayList<>();
+        for (Book book : bookList){
+            String titleBooks= book.getTitle().toLowerCase();
+            if (titleBooks.contains(newText)){
+                bookArrayList.add(book);
+            }
+        }
+
+        bookListRecyclerViewAdapter.setFilter(bookArrayList);
+        return true;
     }
 }
