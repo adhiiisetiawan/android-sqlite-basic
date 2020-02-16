@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:padding="8dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="John Doe"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/editImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/crossImageView"
+        android:src="@drawable/ic_mode_edit_black_24dp"
+        android:alpha="0.5"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/edit_button_description"/>
+
+    <ImageView
+        android:id="@+id/crossImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:alpha="0.5"
+        android:contentDescription="@string/cross_image_content_description" />
+
+    <TextView
+        android:id="@+id/book_number_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/book_number"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/book_number_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="100145"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintLeft_toRightOf="@id/book_number_title_textView"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
+
+    <TextView
+        android:id="@+id/authorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/book_number_title_textView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Author"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/author_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/book_number_title_textView"
+        app:layout_constraintLeft_toRightOf="@id/authorTitle"
+        tools:text="Informatika"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
+
+    <TextView
+        android:id="@+id/year_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/authorTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Year"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/year_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="01559541265"
+        app:layout_constraintTop_toBottomOf="@id/authorTitle"
+        app:layout_constraintLeft_toRightOf="@id/year_title"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
+
+    <TextView
+        android:id="@+id/description_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/year_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Description"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/description_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="apa ini"
+        app:layout_constraintTop_toBottomOf="@id/year_title"
+        app:layout_constraintLeft_toRightOf="@id/description_title"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

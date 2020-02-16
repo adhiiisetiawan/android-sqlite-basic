@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SQLiteKuy</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_book_list">BookListActivity</string>
+    <string name="database_summary">Total Book: %1$d. Total Review: %2$d</string>
+    <string name="cross_image_content_description">Delete Book from SQLite database</string>
+    <string name="edit_button_description">Edit Single Book information</string>
+    <string name="book_number">Book Number</string>
+    <string name="empty_list_message">List is Empty!</string>
+    <string name="all_delete">All Delete</string>
+    <string name="title_activity_review_list">ReviewListActivity</string>
+    <string name="add_new_review">Add New Review</string>
+</resources>
