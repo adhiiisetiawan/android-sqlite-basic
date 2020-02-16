@@ -22,11 +22,11 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        titleTextView= itemView.findViewById(R.id.titleTextView);
+        titleTextView = itemView.findViewById(R.id.titleTextView);
         bookNumTextView = itemView.findViewById(R.id.book_number_TextView);
         authorTextView = itemView.findViewById(R.id.author_TextView);
         yearTextView = itemView.findViewById(R.id.year_TextView);
-        descriptionTextView= itemView.findViewById(R.id.description_TextView);
+        descriptionTextView = itemView.findViewById(R.id.description_TextView);
 
         crossButtonImageView = itemView.findViewById(R.id.crossImageView);
         editButtonImageView = itemView.findViewById(R.id.editImageView);

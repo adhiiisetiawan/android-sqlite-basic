@@ -2,30 +2,26 @@ package com.oxcart.sqlitekuy.Features.BookCRUD.ShowBookList;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.Book;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.BookCreateDialogFragment;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.BookCreateListener;
-import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseContract;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
@@ -93,16 +89,16 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.action_delete){
+        if (item.getItemId() == R.id.action_delete) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("Are you sure, You wanted to delete all students?");
+            alertDialogBuilder.setMessage("Are you sure, You wanted to delete all books?");
             alertDialogBuilder.setPositiveButton("Yes",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
                             boolean isAllDeleted = databaseQueryClass.deleteAllBook();
-                            if(isAllDeleted){
+                            if (isAllDeleted) {
                                 bookList.clear();
                                 bookListRecyclerViewAdapter.notifyDataSetChanged();
                                 viewVisibility();
@@ -110,7 +106,7 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
                         }
                     });
 
-            alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -125,7 +121,7 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
     }
 
     public void viewVisibility() {
-        if(bookList.isEmpty())
+        if (bookList.isEmpty())
             bookListEmptyTextView.setVisibility(View.VISIBLE);
         else
             bookListEmptyTextView.setVisibility(View.GONE);
@@ -133,7 +129,7 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
     }
 
     private void openBookCreateDialog() {
-        BookCreateDialogFragment bookCreateDialogFragment = BookCreateDialogFragment.newInstance("Create Student", this);
+        BookCreateDialogFragment bookCreateDialogFragment = BookCreateDialogFragment.newInstance("Create Book", this);
         bookCreateDialogFragment.show(getSupportFragmentManager(), DatabaseContract.CREATE_BOOK);
     }
 
@@ -154,7 +150,6 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
     }
 
 
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
@@ -164,9 +159,9 @@ public class BookListActivity extends AppCompatActivity implements BookCreateLis
     public boolean onQueryTextChange(String newText) {
         newText = newText.toLowerCase();
         ArrayList<Book> bookArrayList = new ArrayList<>();
-        for (Book book : bookList){
-            String titleBooks= book.getTitle().toLowerCase();
-            if (titleBooks.contains(newText)){
+        for (Book book : bookList) {
+            String titleBooks = book.getTitle().toLowerCase();
+            if (titleBooks.contains(newText)) {
                 bookArrayList.add(book);
             }
         }

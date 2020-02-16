@@ -20,12 +20,12 @@ import java.util.List;
 public class DatabaseQueryClass {
     private Context context;
 
-    public DatabaseQueryClass(Context context){
+    public DatabaseQueryClass(Context context) {
         this.context = context;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
-    public long insertBook(Book book){
+    public long insertBook(Book book) {
 
         long id = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -40,7 +40,7 @@ public class DatabaseQueryClass {
 
         try {
             id = sqLiteDatabase.insertOrThrow(DatabaseContract.TABLE_BOOK, null, contentValues);
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -50,7 +50,7 @@ public class DatabaseQueryClass {
         return id;
     }
 
-    public List<Book> getAllBook(){
+    public List<Book> getAllBook() {
 
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
@@ -60,15 +60,8 @@ public class DatabaseQueryClass {
 
             cursor = sqLiteDatabase.query(DatabaseContract.TABLE_BOOK, null, null, null, null, null, null, null);
 
-            /**
-             // If you want to execute raw query then uncomment below 2 lines. And comment out above line.
-
-             String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_ID, Config.COLUMN_STUDENT_NAME, Config.COLUMN_STUDENT_REGISTRATION, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
-             cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
-             */
-            //INI BELUM
-            if(cursor!=null)
-                if(cursor.moveToFirst()){
+            if (cursor != null)
+                if (cursor.moveToFirst()) {
                     List<Book> bookList = new ArrayList<>();
                     do {
                         int id = cursor.getInt(cursor.getColumnIndex(DatabaseContract.COLUMN_ID));
@@ -78,16 +71,16 @@ public class DatabaseQueryClass {
                         int year = cursor.getInt(cursor.getColumnIndex(DatabaseContract.COLUMN_BOOK_YEAR));
                         String description = cursor.getString(cursor.getColumnIndex(DatabaseContract.COLUMN_BOOK_DESCRIPION));
 
-                        bookList.add(new Book(id, book_name,title, author, year, description));
-                    }   while (cursor.moveToNext());
+                        bookList.add(new Book(id, book_name, title, author, year, description));
+                    } while (cursor.moveToNext());
 
                     return bookList;
                 }
-        } catch (Exception e){
+        } catch (Exception e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, "Operation failed", Toast.LENGTH_SHORT).show();
         } finally {
-            if(cursor!=null)
+            if (cursor != null)
                 cursor.close();
             sqLiteDatabase.close();
         }
@@ -95,7 +88,7 @@ public class DatabaseQueryClass {
         return Collections.emptyList();
     }
 
-    public Book getBookByBookNumber(long bookNumber){
+    public Book getBookByBookNumber(long bookNumber) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
@@ -108,14 +101,7 @@ public class DatabaseQueryClass {
                     DatabaseContract.COLUMN_BOOK_NUMBER + " = ? ", new String[]{String.valueOf(bookNumber)},
                     null, null, null);
 
-            /**
-             // If you want to execute raw query then uncomment below 2 lines. And comment out above sqLiteDatabase.query() method.
-
-             String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION, String.valueOf(registrationNum));
-             cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
-             */
-
-            if(cursor.moveToFirst()){
+            if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndex(DatabaseContract.COLUMN_ID));
                 long bookNum = cursor.getLong(cursor.getColumnIndex(DatabaseContract.COLUMN_BOOK_NUMBER));
                 String title = cursor.getString(cursor.getColumnIndex(DatabaseContract.COLUMN_BOOK_TITLE));
@@ -125,11 +111,11 @@ public class DatabaseQueryClass {
 
                 book = new Book(id, bookNum, title, author, year, description);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, "Operation failed", Toast.LENGTH_SHORT).show();
         } finally {
-            if(cursor!=null)
+            if (cursor != null)
                 cursor.close();
             sqLiteDatabase.close();
         }
@@ -137,7 +123,7 @@ public class DatabaseQueryClass {
         return book;
     }
 
-    public long updateBookInfo(Book book){
+    public long updateBookInfo(Book book) {
 
         long rowCount = 0;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -152,9 +138,9 @@ public class DatabaseQueryClass {
 
         try {
             rowCount = sqLiteDatabase.update(DatabaseContract.TABLE_BOOK, contentValues,
-                    DatabaseContract.COLUMN_ID+ " = ? ",
-                    new String[] {String.valueOf(book.getId())});
-        } catch (SQLiteException e){
+                    DatabaseContract.COLUMN_ID + " = ? ",
+                    new String[]{String.valueOf(book.getId())});
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -171,9 +157,9 @@ public class DatabaseQueryClass {
 
         try {
             deletedRowCount = sqLiteDatabase.delete(DatabaseContract.TABLE_BOOK,
-                    DatabaseContract.BOOK_NUMBER+ " = ? ",
-                    new String[]{ String.valueOf(bookNum)});
-        } catch (SQLiteException e){
+                    DatabaseContract.BOOK_NUMBER + " = ? ",
+                    new String[]{String.valueOf(bookNum)});
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -183,7 +169,7 @@ public class DatabaseQueryClass {
         return deletedRowCount;
     }
 
-    public boolean deleteAllBook(){
+    public boolean deleteAllBook() {
         boolean deleteStatus = false;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
@@ -195,10 +181,10 @@ public class DatabaseQueryClass {
 
             long count = DatabaseUtils.queryNumEntries(sqLiteDatabase, DatabaseContract.TABLE_BOOK);
 
-            if(count==0)
+            if (count == 0)
                 deleteStatus = true;
 
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -208,14 +194,14 @@ public class DatabaseQueryClass {
         return deleteStatus;
     }
 
-    public long getNumberOfBook(){
+    public long getNumberOfBook() {
         long count = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         try {
             count = DatabaseUtils.queryNumEntries(sqLiteDatabase, DatabaseContract.TABLE_BOOK);
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -226,7 +212,7 @@ public class DatabaseQueryClass {
     }
 
     // review
-    public long insertReview(Review review, long booksNumber){
+    public long insertReview(Review review, long booksNumber) {
         long rowId = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
@@ -239,7 +225,7 @@ public class DatabaseQueryClass {
 
         try {
             rowId = sqLiteDatabase.insertOrThrow(DatabaseContract.TABLE_REVIEW, null, contentValues);
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Logger.d(e);
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -249,29 +235,29 @@ public class DatabaseQueryClass {
         return rowId;
     }
 
-    public Review getReviewById(long reviewId){
+    public Review getReviewById(long reviewId) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         Review review = null;
 
         Cursor cursor = null;
-        try{
+        try {
             cursor = sqLiteDatabase.query(DatabaseContract.TABLE_REVIEW, null,
-                    DatabaseContract.COLUMN_REVIEW_ID + " = ? ", new String[] {String.valueOf(reviewId)},
+                    DatabaseContract.COLUMN_REVIEW_ID + " = ? ", new String[]{String.valueOf(reviewId)},
                     null, null, null);
 
-            if(cursor!=null && cursor.moveToFirst()){
+            if (cursor != null && cursor.moveToFirst()) {
                 String reviewerName = cursor.getString(cursor.getColumnIndex(DatabaseContract.COLUMN_REVIEWER_NAME));
                 int ratting = cursor.getInt(cursor.getColumnIndex(DatabaseContract.COLUMN_RATTING));
                 String comment = cursor.getString(cursor.getColumnIndex(DatabaseContract.COLUMN_COMMENT));
 
                 review = new Review(reviewId, reviewerName, ratting, comment);
             }
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
-            if(cursor!=null)
+            if (cursor != null)
                 cursor.close();
             sqLiteDatabase.close();
         }
@@ -279,7 +265,7 @@ public class DatabaseQueryClass {
         return review;
     }
 
-    public long updateReviewInfo(Review review){
+    public long updateReviewInfo(Review review) {
 
         long rowCount = 0;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -292,9 +278,9 @@ public class DatabaseQueryClass {
 
         try {
             rowCount = sqLiteDatabase.update(DatabaseContract.TABLE_REVIEW, contentValues,
-                    DatabaseContract.COLUMN_REVIEW_ID+ " = ? ",
-                    new String[] {String.valueOf(review.getId())});
-        } catch (SQLiteException e){
+                    DatabaseContract.COLUMN_REVIEW_ID + " = ? ",
+                    new String[]{String.valueOf(review.getId())});
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -304,21 +290,20 @@ public class DatabaseQueryClass {
         return rowCount;
     }
 
-    //INI BELUM
-    public List<Review> getAllReviewByBookNo(long bookNo){
+    public List<Review> getAllReviewByBookNo(long bookNo) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         List<Review> reviewList = new ArrayList<>();
         Cursor cursor = null;
-        try{
+        try {
             cursor = sqLiteDatabase.query(DatabaseContract.TABLE_REVIEW,
-                    new String[] {DatabaseContract.COLUMN_REVIEW_ID, DatabaseContract.COLUMN_REVIEWER_NAME, DatabaseContract.COLUMN_RATTING, DatabaseContract.COLUMN_COMMENT},
-                    DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN+ " = ? ",
-                    new String[] {String.valueOf(bookNo)},
+                    new String[]{DatabaseContract.COLUMN_REVIEW_ID, DatabaseContract.COLUMN_REVIEWER_NAME, DatabaseContract.COLUMN_RATTING, DatabaseContract.COLUMN_COMMENT},
+                    DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN + " = ? ",
+                    new String[]{String.valueOf(bookNo)},
                     null, null, null);
 
-            if(cursor!=null && cursor.moveToFirst()){
+            if (cursor != null && cursor.moveToFirst()) {
                 reviewList = new ArrayList<>();
                 do {
                     int id = cursor.getInt(cursor.getColumnIndex(DatabaseContract.COLUMN_REVIEW_ID));
@@ -329,10 +314,10 @@ public class DatabaseQueryClass {
                     reviewList.add(new Review(id, reviwerName, ratting, comment));
                 } while (cursor.moveToNext());
             }
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
-            if(cursor!=null)
+            if (cursor != null)
                 cursor.close();
             sqLiteDatabase.close();
         }
@@ -345,7 +330,7 @@ public class DatabaseQueryClass {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         int row = sqLiteDatabase.delete(DatabaseContract.TABLE_REVIEW,
-                DatabaseContract.COLUMN_REVIEW_ID+ " = ? ", new String[]{String.valueOf(reviewId)});
+                DatabaseContract.COLUMN_REVIEW_ID + " = ? ", new String[]{String.valueOf(reviewId)});
 
         return row > 0;
     }
@@ -355,19 +340,19 @@ public class DatabaseQueryClass {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         int row = sqLiteDatabase.delete(DatabaseContract.TABLE_REVIEW,
-                DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN+ " = ? ", new String[]{String.valueOf(bookNum)});
+                DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN + " = ? ", new String[]{String.valueOf(bookNum)});
 
         return row > 0;
     }
 
-    public long getNumberOfReview(){
+    public long getNumberOfReview() {
         long count = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         try {
             count = DatabaseUtils.queryNumEntries(sqLiteDatabase, DatabaseContract.TABLE_REVIEW);
-        } catch (SQLiteException e){
+        } catch (SQLiteException e) {
             Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -376,7 +361,6 @@ public class DatabaseQueryClass {
 
         return count;
     }
-
 
 
 }

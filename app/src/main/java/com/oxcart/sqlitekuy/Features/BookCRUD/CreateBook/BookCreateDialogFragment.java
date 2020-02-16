@@ -3,15 +3,14 @@ package com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
@@ -19,7 +18,7 @@ import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BookCreateDialogFragment extends DialogFragment{
+public class BookCreateDialogFragment extends DialogFragment {
     private static BookCreateListener bookCreateListener;
 
     private EditText editBookNumber;
@@ -41,7 +40,7 @@ public class BookCreateDialogFragment extends DialogFragment{
         // Required empty public constructor
     }
 
-    public static BookCreateDialogFragment newInstance(String titleDialog, BookCreateListener listener){
+    public static BookCreateDialogFragment newInstance(String titleDialog, BookCreateListener listener) {
         bookCreateListener = listener;
         BookCreateDialogFragment bookCreateDialogFragment = new BookCreateDialogFragment();
         Bundle args = new Bundle();
@@ -79,13 +78,13 @@ public class BookCreateDialogFragment extends DialogFragment{
                 yearString = Integer.parseInt(editYear.getText().toString());
                 descrptionString = editDescrption.getText().toString();
 
-                Book book = new Book(-1, bookNumber,titleString, authorString, yearString, descrptionString);
+                Book book = new Book(-1, bookNumber, titleString, authorString, yearString, descrptionString);
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 
                 long id = databaseQueryClass.insertBook(book);
 
-                if(id>0){
+                if (id > 0) {
                     book.setId(id);
                     bookCreateListener.onBookCreated(book);
                     getDialog().dismiss();

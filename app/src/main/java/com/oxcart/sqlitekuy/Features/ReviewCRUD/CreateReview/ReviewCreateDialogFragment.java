@@ -3,15 +3,14 @@ package com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
@@ -34,7 +33,7 @@ public class ReviewCreateDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    public static ReviewCreateDialogFragment newInstance(long bookBookNumber, ReviewCreateListener listener){
+    public static ReviewCreateDialogFragment newInstance(long bookBookNumber, ReviewCreateListener listener) {
         bookNumber = bookBookNumber;
         reviewCreateListener = listener;
 
@@ -72,7 +71,7 @@ public class ReviewCreateDialogFragment extends DialogFragment {
 
                 long id = databaseQueryClass.insertReview(review, bookNumber);
 
-                if(id>0){
+                if (id > 0) {
                     review.setId(id);
                     reviewCreateListener.onReviewCreated(review);
                     getDialog().dismiss();

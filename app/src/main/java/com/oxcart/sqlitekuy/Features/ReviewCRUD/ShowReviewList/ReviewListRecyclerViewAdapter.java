@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.oxcart.sqlitekuy.Features.BookCRUD.ShowBookList.CustomViewHolder;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.UpdateReviewInfo.ReviewUpdateDIalogFragment;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.UpdateReviewInfo.ReviewUpdateListener;
@@ -21,8 +20,6 @@ import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.security.auth.Subject;
 
 public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Context context;
@@ -44,7 +41,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final int listPosition = position;
-        final Review review= reviewList.get(position);
+        final Review review = reviewList.get(position);
 
         holder.reviwerNameTextView.setText(review.getReviwer_name());
         holder.rattingTextView.setText(String.valueOf(review.getRatting()));
@@ -54,7 +51,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setMessage("Are you sure, You wanted to delete this subject?");
+                alertDialogBuilder.setMessage("Are you sure, You wanted to delete this review?");
                 alertDialogBuilder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -63,7 +60,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -88,7 +85,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
         return reviewList.size();
     }
 
-    private void editReview(long reviewId, int listPosition){
+    private void editReview(long reviewId, int listPosition) {
         ReviewUpdateDIalogFragment reviewUpdateDIalogFragment = ReviewUpdateDIalogFragment.newInstance(reviewId, listPosition, new ReviewUpdateListener() {
             @Override
             public void onReviewInfoUpdate(Review review, int position) {
@@ -104,7 +101,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
         DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(context);
         boolean isDeleted = databaseQueryClass.deleteReviewById(review.getId());
 
-        if(isDeleted) {
+        if (isDeleted) {
             reviewList.remove(review);
             notifyDataSetChanged();
             ((ReviewListActivity) context).viewVisibility();
@@ -112,7 +109,7 @@ public class ReviewListRecyclerViewAdapter extends RecyclerView.Adapter<ViewHold
             Toast.makeText(context, "Cannot delete!", Toast.LENGTH_SHORT).show();
     }
 
-    public void setFilter(ArrayList<Review> newListReview){
+    public void setFilter(ArrayList<Review> newListReview) {
         reviewList = new ArrayList<>();
         reviewList.addAll(newListReview);
         notifyDataSetChanged();

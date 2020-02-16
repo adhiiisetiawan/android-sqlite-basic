@@ -3,15 +3,14 @@ package com.oxcart.sqlitekuy.Features.BookCRUD.UpdateBookInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.Book;
 import com.oxcart.sqlitekuy.R;
@@ -49,7 +48,7 @@ public class BookUpdateDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    public static BookUpdateDialogFragment newInstance(long bookNumbers, int position, BookUpdateListener listener){
+    public static BookUpdateDialogFragment newInstance(long bookNumbers, int position, BookUpdateListener listener) {
         bookNum = bookNumbers;
         bookItemPosition = position;
         bookUpdateListener = listener;
@@ -77,7 +76,7 @@ public class BookUpdateDialogFragment extends DialogFragment {
         yearEditText = view.findViewById(R.id.edit_text_book_year);
         descriptionEditText = view.findViewById(R.id.edit_text_book_description);
 
-        updateButton = view.findViewById(R.id.updateStudentInfoButton);
+        updateButton = view.findViewById(R.id.updateBookInfoButton);
         cancelButton = view.findViewById(R.id.cancelButton);
 
         String title = getArguments().getString(DatabaseContract.TITLE);
@@ -85,7 +84,7 @@ public class BookUpdateDialogFragment extends DialogFragment {
 
         mBook = databaseQueryClass.getBookByBookNumber(bookNum);
 
-        if(mBook!=null){
+        if (mBook != null) {
             bookNumEditText.setText(String.valueOf(mBook.getBook_number()));
             titleEditText.setText(mBook.getTitle());
             authorEditText.setText(mBook.getAuthor());
@@ -109,7 +108,7 @@ public class BookUpdateDialogFragment extends DialogFragment {
 
                     long id = databaseQueryClass.updateBookInfo(mBook);
 
-                    if(id>0){
+                    if (id > 0) {
                         bookUpdateListener.onBookInfoUpdated(mBook, bookItemPosition);
                         getDialog().dismiss();
                     }

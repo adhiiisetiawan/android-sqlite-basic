@@ -54,7 +54,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:hint="Description"/>
     <Button
-        android:id="@+id/updateStudentInfoButton"
+        android:id="@+id/updateBookInfoButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_book_description"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_book_description"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/updateStudentInfoButton"
+        app:layout_constraintLeft_toRightOf="@+id/updateBookInfoButton"
         android:text="Cancel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        reviwerNameTextView= itemView.findViewById(R.id.reviewer_name_textView);
+        reviwerNameTextView = itemView.findViewById(R.id.reviewer_name_textView);
         rattingTextView = itemView.findViewById(R.id.ratting_TextView);
         commentTextView = itemView.findViewById(R.id.comment_textView);
 

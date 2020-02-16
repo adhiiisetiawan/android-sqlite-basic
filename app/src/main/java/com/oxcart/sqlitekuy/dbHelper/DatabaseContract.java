@@ -1,9 +1,9 @@
 package com.oxcart.sqlitekuy.dbHelper;
 
-public class DatabaseContract  {
+public class DatabaseContract {
     public static final String DATABASE_NAME = "library-db";
 
-    //column names of student table
+    //column names of book table
     public static final String TABLE_BOOK = "book";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_BOOK_NUMBER = "book_number";
@@ -12,7 +12,7 @@ public class DatabaseContract  {
     public static final String COLUMN_BOOK_YEAR = "year";
     public static final String COLUMN_BOOK_DESCRIPION = "description";
 
-    //column names of subject table
+    //column names of review table
     public static final String TABLE_REVIEW = "review";
     public static final String COLUMN_REVIEW_ID = "_id";
     public static final String COLUMN_BOOK_NUMBER_FOREIGN = "fk_book_number";

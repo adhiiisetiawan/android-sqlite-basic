@@ -17,7 +17,6 @@ import com.orhanobut.logger.Logger;
 import com.oxcart.sqlitekuy.Features.BookCRUD.CreateBook.Book;
 import com.oxcart.sqlitekuy.Features.BookCRUD.UpdateBookInfo.BookUpdateDialogFragment;
 import com.oxcart.sqlitekuy.Features.BookCRUD.UpdateBookInfo.BookUpdateListener;
-import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.ShowReviewList.ReviewListActivity;
 import com.oxcart.sqlitekuy.R;
 import com.oxcart.sqlitekuy.dbHelper.DatabaseContract;
@@ -48,7 +47,7 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         final int itemPosition = position;
-        final Book book= bookList.get(position);
+        final Book book = bookList.get(position);
 
         holder.bookNumTextView.setText(String.valueOf(book.getBook_number()));
         holder.titleTextView.setText(book.getTitle());
@@ -60,7 +59,7 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setMessage("Are you sure, You wanted to delete this student?");
+                alertDialogBuilder.setMessage("Are you sure, You wanted to delete this book?");
                 alertDialogBuilder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -69,7 +68,7 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -114,7 +113,7 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
         Book book = bookList.get(position);
         long count = databaseQueryClass.deleteBookByBookNum(book.getBook_number());
 
-        if(count>0){
+        if (count > 0) {
             bookList.remove(position);
             notifyDataSetChanged();
             ((BookListActivity) context).viewVisibility();
@@ -124,7 +123,7 @@ public class BookListRecyclerViewAdapter extends RecyclerView.Adapter<CustomView
 
     }
 
-    public void setFilter(ArrayList<Book> newListBook){
+    public void setFilter(ArrayList<Book> newListBook) {
         bookList = new ArrayList<>();
         bookList.addAll(newListBook);
         notifyDataSetChanged();

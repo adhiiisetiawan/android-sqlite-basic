@@ -2,25 +2,21 @@ package com.oxcart.sqlitekuy.Features.ReviewCRUD.ShowReviewList;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.ReviewCreateDialogFragment;
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.ReviewCreateListener;
@@ -159,9 +155,9 @@ public class ReviewListActivity extends AppCompatActivity implements ReviewCreat
     public boolean onQueryTextChange(String newText) {
         newText = newText.toLowerCase();
         ArrayList<Review> reviewArrayList = new ArrayList<>();
-        for (Review review : reviewList){
+        for (Review review : reviewList) {
             String reviewerName = review.getReviwer_name().toLowerCase();
-            if (reviewerName.contains(newText)){
+            if (reviewerName.contains(newText)) {
                 reviewArrayList.add(review);
             }
         }

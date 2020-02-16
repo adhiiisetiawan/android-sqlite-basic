@@ -3,15 +3,14 @@ package com.oxcart.sqlitekuy.Features.ReviewCRUD.UpdateReviewInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.oxcart.sqlitekuy.Features.ReviewCRUD.CreateReview.Review;
 import com.oxcart.sqlitekuy.R;
@@ -21,25 +20,22 @@ import com.oxcart.sqlitekuy.dbHelper.DatabaseQueryClass;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReviewUpdateDIalogFragment extends DialogFragment{
-    private EditText reviwerNameEditText;
-    private EditText rattingEditText;
-    private EditText commentEditText;
-
-    private Button updateButton;
-    private Button cancelButton;
-
+public class ReviewUpdateDIalogFragment extends DialogFragment {
     private static ReviewUpdateListener reviewUpdateListener;
     private static long reviewId;
     private static int position;
-
+    private EditText reviwerNameEditText;
+    private EditText rattingEditText;
+    private EditText commentEditText;
+    private Button updateButton;
+    private Button cancelButton;
     private DatabaseQueryClass databaseQueryClass;
 
     public ReviewUpdateDIalogFragment() {
         // Required empty public constructor
     }
 
-    public static ReviewUpdateDIalogFragment newInstance(long revId, int pos, ReviewUpdateListener listener){
+    public static ReviewUpdateDIalogFragment newInstance(long revId, int pos, ReviewUpdateListener listener) {
         reviewId = revId;
         position = pos;
         reviewUpdateListener = listener;
@@ -83,11 +79,11 @@ public class ReviewUpdateDIalogFragment extends DialogFragment{
                 int ratting = Integer.parseInt(rattingEditText.getText().toString());
                 String comment = commentEditText.getText().toString();
 
-                Review reviews= new Review(reviewId, reviewersName, ratting, comment);
+                Review reviews = new Review(reviewId, reviewersName, ratting, comment);
 
                 long rowCount = databaseQueryClass.updateReviewInfo(reviews);
 
-                if(rowCount>0){
+                if (rowCount > 0) {
                     reviewUpdateListener.onReviewInfoUpdate(reviews, position);
                     getDialog().dismiss();
                 }

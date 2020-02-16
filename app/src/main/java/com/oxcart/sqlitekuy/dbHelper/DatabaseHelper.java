@@ -8,13 +8,11 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static DatabaseHelper databaseHelper;
-
     // All Static variables
     private static final int DATABASE_VERSION = 1;
-
     // Database Name
     private static final String DATABASE_NAME = DatabaseContract.DATABASE_NAME;
+    private static DatabaseHelper databaseHelper;
 
     // Constructor
     private DatabaseHelper(Context context) {
@@ -23,9 +21,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static DatabaseHelper getInstance(Context context) {
-        if(databaseHelper==null){
+        if (databaseHelper == null) {
             synchronized (DatabaseHelper.class) {
-                if(databaseHelper==null)
+                if (databaseHelper == null)
                     databaseHelper = new DatabaseHelper(context);
             }
         }
