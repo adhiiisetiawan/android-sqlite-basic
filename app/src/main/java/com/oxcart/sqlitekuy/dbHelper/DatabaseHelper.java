@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + DatabaseContract.COLUMN_RATTING + " INTEGER NOT NULL, "
                 + DatabaseContract.COLUMN_COMMENT + " TEXT NOT NULL, " //nullable
                 + "FOREIGN KEY (" + DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN + ") REFERENCES " + DatabaseContract.TABLE_BOOK + "(" + DatabaseContract.COLUMN_BOOK_NUMBER + ") ON UPDATE CASCADE ON DELETE CASCADE, "
-                + "CONSTRAINT " + DatabaseContract.BOOK_SUB_CONSTRAINT + " UNIQUE (" + DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN + ")"
+                + "CONSTRAINT " + DatabaseContract.BOOK_SUB_CONSTRAINT + " UNIQUE (" + DatabaseContract.COLUMN_BOOK_NUMBER_FOREIGN + "," + DatabaseContract.COLUMN_REVIEW_ID + ")"
                 + ")";
 
         db.execSQL(CREATE_BOOK_TABLE);

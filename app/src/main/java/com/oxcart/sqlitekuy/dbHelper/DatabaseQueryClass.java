@@ -225,7 +225,7 @@ public class DatabaseQueryClass {
         return count;
     }
 
-    // subjects
+    // review
     public long insertReview(Review review, long booksNumber){
         long rowId = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -257,8 +257,8 @@ public class DatabaseQueryClass {
 
         Cursor cursor = null;
         try{
-            cursor = sqLiteDatabase.query(DatabaseContract.TABLE_BOOK, null,
-                    DatabaseContract.COLUMN_REVIEW_ID+ " = ? ", new String[] {String.valueOf(reviewId)},
+            cursor = sqLiteDatabase.query(DatabaseContract.TABLE_REVIEW, null,
+                    DatabaseContract.COLUMN_REVIEW_ID + " = ? ", new String[] {String.valueOf(reviewId)},
                     null, null, null);
 
             if(cursor!=null && cursor.moveToFirst()){

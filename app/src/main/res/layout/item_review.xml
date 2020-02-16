@@ -69,20 +69,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ratting_title_textView"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Description"
-        android:textStyle="bold"
-        android:lines="3"/>
+        android:text="Comment"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/comment_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ratting_title_textView"
-        app:layout_constraintLeft_toRightOf="@id/comment_title_textView"
-        tools:text="Informatika"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:lines="3"/>
+        app:layout_constraintTop_toBottomOf="@id/comment_title_textView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="Informatika"/>
 
 
 

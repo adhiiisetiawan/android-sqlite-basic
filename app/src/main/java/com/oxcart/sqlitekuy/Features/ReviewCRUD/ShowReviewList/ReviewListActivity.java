@@ -108,7 +108,7 @@ public class ReviewListActivity extends AppCompatActivity implements ReviewCreat
                 return true;
             case R.id.action_delete:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Are you sure, You wanted to delete all subjects?");
+                alertDialogBuilder.setMessage("Are you sure, You wanted to delete all review?");
                 alertDialogBuilder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
